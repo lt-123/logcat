@@ -1,10 +1,9 @@
-package xyz.liut.logcat.android;
+package xyz.liut.logcat4android;
 
 import android.util.Log;
 import org.jetbrains.annotations.NotNull;
 import xyz.liut.logcat.LogHandler;
 import xyz.liut.logcat.LogLevel;
-import xyz.liut.logcat4android.BuildConfig;
 
 /**
  * android logcat

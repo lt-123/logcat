@@ -1,22 +1,69 @@
 buildscript {
     repositories {
+        maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
+        maven { url 'http://maven.aliyun.com/nexus/content/repositories/jcenter' }
+        maven { url 'http://maven.aliyun.com/nexus/content/repositories/google' }
+
         google()
         jcenter()
         mavenCentral()
     }
     dependencies {
+        // android
         classpath 'com.android.tools.build:gradle:3.4.2'
-        classpath 'com.github.dcendents:android-maven-gradle-plugin:2.1'
+        // j frog
+        classpath 'com.novoda:bintray-release:0.9.1'
     }
 }
 
-group 'xyz.liut.logcat'
-version '1.0-SNAPSHOT'
-
-task clean(type: Delete) {
-    delete rootProject.buildDir
+plugins {
+    id 'java'
 }
 
-tasks.withType(JavaCompile) {
-    options.encoding = "UTF-8"
+// lib 全局配置
+ext {
+    group 'xyz.liut.logcat'
+    version '0.0.1'
 }
+
+allprojects {
+
+    group 'xyz.liut.logcat'
+    version version
+
+    sourceCompatibility = 1.8
+
+    repositories {
+        maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
+        maven { url 'http://maven.aliyun.com/nexus/content/repositories/jcenter' }
+        maven { url 'http://maven.aliyun.com/nexus/content/repositories/google' }
+
+        jcenter()
+        mavenCentral()
+        google()
+    }
+
+    // 编译JAVA文件时采用UTF-8
+    tasks.withType(JavaCompile) {
+        options.encoding = "UTF-8"
+    }
+
+    // 生成javadoc出现编码问题添加
+    javadoc {
+        options {
+            encoding "UTF-8"
+            charSet 'UTF-8'
+            author true
+            version version
+            links "http://docs.oracle.com/javase/7/docs/api"
+            title "logcat doc"
+        }
+    }
+
+
+}
+
+//task clean(type: Delete) {
+//    delete rootProject.buildDir
+//}
+

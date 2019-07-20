@@ -1,5 +1,5 @@
 apply plugin: 'com.android.library'
-apply plugin: 'com.github.dcendents.android-maven'
+apply plugin: 'com.novoda.bintray-release'
 
 android {
     compileSdkVersion 28
@@ -7,7 +7,7 @@ android {
         minSdkVersion 14
         targetSdkVersion 28
         versionCode 1
-        versionName '1.0'
+        versionName version
     }
     buildTypes {
         release {
@@ -21,24 +21,18 @@ android {
     }
 }
 
-
-group 'xyz.liut.logcat'
-version '1.0-SNAPSHOT'
-
-sourceCompatibility = 1.8
-
-repositories {
-    google()
-    jcenter()
-    mavenCentral()
+publish {
+    userOrg = 'lt-123'
+    repoName = 'maven'
+    groupId = 'xyz.liut.logcat4android'
+    artifactId = 'logcat4android'
+    publishVersion = version
+    desc = 'java logcat util'
+    website = 'https://github.com/lt-123/logcat'
 }
 
 dependencies {
     testImplementation group: 'junit', name: 'junit', version: '4.12'
-    
-    implementation project(':logcatlib')
-}
 
-tasks.withType(JavaCompile) {
-    options.encoding = "UTF-8"
+    implementation project(':logcatlib')
 }

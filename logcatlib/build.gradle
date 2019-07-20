@@ -1,16 +1,16 @@
 plugins {
     id 'java'
-    id 'com.github.dcendents.android-maven'
+    id 'com.novoda.bintray-release'
 }
 
-group 'xyz.liut.logcat'
-version '1.0-SNAPSHOT'
-
-sourceCompatibility = 1.8
-
-repositories {
-    mavenCentral()
-    jcenter()
+publish {
+    userOrg = 'lt-123'
+    repoName = 'maven'
+    groupId = 'xyz.liut.logcat'
+    artifactId = 'logcat'
+    publishVersion = version
+    desc = 'java logcat util'
+    website = 'https://github.com/lt-123/logcat'
 }
 
 dependencies {
@@ -18,8 +18,4 @@ dependencies {
 
     // jb-anno
     compile 'org.jetbrains:annotations-java5:15.0'
-}
-
-tasks.withType(JavaCompile) {
-    options.encoding = "UTF-8"
 }
