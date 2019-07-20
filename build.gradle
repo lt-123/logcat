@@ -1,0 +1,6 @@
+group 'xyz.liut.logcat'
+version '1.0-SNAPSHOT'
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}
