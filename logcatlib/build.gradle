@@ -19,3 +19,20 @@ dependencies {
     // jb-anno
     compile 'org.jetbrains:annotations-java5:15.0'
 }
+
+// 编译JAVA文件时采用UTF-8
+tasks.withType(JavaCompile) {
+    options.encoding = "UTF-8"
+}
+
+// 生成javadoc出现编码问题添加
+javadoc {
+    options {
+        encoding "UTF-8"
+        charSet 'UTF-8'
+        author true
+        version version
+        links "http://docs.oracle.com/javase/7/docs/api"
+        title "logcat doc"
+    }
+}
