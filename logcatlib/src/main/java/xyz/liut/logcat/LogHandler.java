@@ -1,7 +1,7 @@
 package xyz.liut.logcat;
 
 
-import org.jetbrains.annotations.Nullable;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * log 处理
@@ -15,6 +15,6 @@ public interface LogHandler {
      * @param tag   tag
      * @param msg   msg
      */
-    void log(LogLevel level, @Nullable String tag, @Nullable String msg);
+    void log(LogLevel level, @NotNull String tag, @NotNull String msg);
 
 }

@@ -1,5 +1,6 @@
 package xyz.liut.logcat.handler;
 
+import org.jetbrains.annotations.NotNull;
 import xyz.liut.logcat.LogHandler;
 import xyz.liut.logcat.LogLevel;
 
@@ -24,7 +25,7 @@ public class StdHandler implements LogHandler {
 
 
     @Override
-    public void log(LogLevel level, String tag, String msg) {
+    public void log(LogLevel level, @NotNull String tag, @NotNull String msg) {
 
         String log = tag + ": " + msg;
 

@@ -1,7 +1,7 @@
 package xyz.liut.logcat.handler;
 
 
-import org.jetbrains.annotations.Nullable;
+import org.jetbrains.annotations.NotNull;
 import xyz.liut.logcat.LogHandler;
 import xyz.liut.logcat.LogLevel;
 
@@ -113,7 +113,7 @@ public class FileHandler implements LogHandler, Runnable {
      * @param msg   -
      */
     @Override
-    public void log(LogLevel level, @Nullable String tag, @Nullable String msg) {
+    public void log(LogLevel level, @NotNull String tag, @NotNull String msg) {
 
         // VERBOSE 级别不保存
         if (level == LogLevel.VERBOSE) {

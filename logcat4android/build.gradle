@@ -4,7 +4,7 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.3.2'
+        classpath 'com.android.tools.build:gradle:3.4.2'
     }
 }
 
@@ -13,14 +13,14 @@ apply plugin: 'com.android.library'
 android {
     compileSdkVersion 28
     defaultConfig {
-        minSdkVersion 1
+        minSdkVersion 14
         targetSdkVersion 28
         versionCode 1
         versionName '1.0'
     }
     buildTypes {
         release {
-            minifyEnabled true
+            minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
@@ -37,9 +37,16 @@ version '1.0-SNAPSHOT'
 sourceCompatibility = 1.8
 
 repositories {
+    google()
     mavenCentral()
 }
 
 dependencies {
     testImplementation group: 'junit', name: 'junit', version: '4.12'
+    
+    implementation project(':logcatlib')
+}
+
+tasks.withType(JavaCompile) {
+    options.encoding = "UTF-8"
 }
