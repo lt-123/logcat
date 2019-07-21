@@ -11,74 +11,76 @@ import java.util.Set;
  * <p>
  * Create by liut on 2018/10/15 0015
  */
-@SuppressWarnings({"WeakerAccess", "unused"})
+@SuppressWarnings({"unused"})
 public class Logcat {
 
+    /**
+     * logHandler 集合
+     */
     private final static Set<LogHandler> handlers = new HashSet<>(1);
 
+    /**
+     * log 级别
+     */
+    private static volatile LogLevel level = LogLevel.VERBOSE;
+
+    /**
+     * 获取 logHandler 列表
+     *
+     * @return 列表
+     */
     public static Set<LogHandler> getHandlers() {
         return handlers;
     }
 
-    public static void v(Object msg) {
-        v(null, msg);
+
+    /**
+     * @return 旧的级别
+     */
+    public static LogLevel getLevel() {
+        return level;
     }
 
-    public static void v(String tag, Object msg) {
-        outputLogcat(LogLevel.VERBOSE, tag, msg, null);
-    }
-
-
-    public static void d(Object msg) {
-        d(null, msg);
-    }
-
-    public static void d(String tag, Object msg) {
-        outputLogcat(LogLevel.DEBUG, tag, msg, null);
-    }
-
-
-    public static void i(Object msg) {
-        i(null, msg);
-    }
-
-    public static void i(String tag, Object msg) {
-        outputLogcat(LogLevel.INFO, tag, msg, null);
+    /**
+     * 设置Log级别
+     *
+     * @param level 新级别
+     */
+    public static void setLevel(LogLevel level) {
+        Logcat.level = level;
     }
 
 
-    public static void w(Object msg) {
-        w(null, msg);
+// ==================================================================================================
+
+    static void v(String tag, Object msg) {
+        if (LogLevel.VERBOSE.compareTo(level) > -1)
+            outputLogcat(LogLevel.VERBOSE, tag, msg, null);
     }
 
-    public static void w(String tag, Object msg) {
-        outputLogcat(LogLevel.WARN, tag, msg, null);
+    static void d(String tag, Object msg) {
+        if (LogLevel.DEBUG.compareTo(level) > -1)
+            outputLogcat(LogLevel.DEBUG, tag, msg, null);
     }
 
-
-    public static void e(Object msg) {
-        e(null, msg);
+    static void i(String tag, Object msg) {
+        if (LogLevel.INFO.compareTo(level) > -1)
+            outputLogcat(LogLevel.INFO, tag, msg, null);
     }
 
-    public static void e(String tag, Object msg) {
-        outputLogcat(LogLevel.ERROR, tag, msg, null);
+    static void w(String tag, Object msg) {
+        if (LogLevel.WARN.compareTo(level) > -1)
+            outputLogcat(LogLevel.WARN, tag, msg, null);
     }
 
-    public static void e(Object msg, Throwable e) {
-        outputLogcat(LogLevel.ERROR, null, msg, e);
+    static void e(String tag, Object msg, Throwable e) {
+        if (LogLevel.ERROR.compareTo(level) > -1)
+            outputLogcat(LogLevel.ERROR, tag, msg, e);
     }
 
-    public static void e(String tag, Object msg, Throwable e) {
-        outputLogcat(LogLevel.ERROR, tag, msg, e);
-    }
-
-
-    public static void a(Object msg) {
-        a(null, msg);
-    }
-
-    public static void a(String tag, Object msg) {
-        outputLogcat(LogLevel.ASSERT, tag, msg, null);
+    static void a(String tag, Object msg) {
+        if (LogLevel.ASSERT.compareTo(level) > -1)
+            outputLogcat(LogLevel.ASSERT, tag, msg, null);
     }
 
 
@@ -92,6 +94,7 @@ public class Logcat {
     private static void outputLogcat(LogLevel logLevel, @Nullable String tag, Object msg, Throwable e) {
         if (handlers.size() == 0) {
             System.out.println("当前没有 LogHandler " + msg);
+            return;
         }
 
         if (tag == null) {
@@ -158,6 +161,5 @@ public class Logcat {
         }
         return tag;
     }
-
 
 }

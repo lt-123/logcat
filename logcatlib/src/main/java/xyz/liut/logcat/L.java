@@ -10,7 +10,7 @@ package xyz.liut.logcat;
 public final class L {
 
     public static void v(Object msg) {
-        Logcat.v(msg);
+        Logcat.v(null, msg);
     }
 
     public static void v(String tag, Object msg) {
@@ -18,7 +18,7 @@ public final class L {
     }
 
     public static void d(Object msg) {
-        Logcat.d(msg);
+        Logcat.d(null, msg);
     }
 
     public static void d(String tag, Object msg) {
@@ -27,7 +27,7 @@ public final class L {
 
 
     public static void i(Object msg) {
-        Logcat.i(msg);
+        Logcat.i(null, msg);
     }
 
     public static void i(String tag, Object msg) {
@@ -36,7 +36,7 @@ public final class L {
 
 
     public static void w(Object msg) {
-        Logcat.w(msg);
+        Logcat.w(null, msg);
     }
 
     public static void w(String tag, Object msg) {
@@ -45,15 +45,15 @@ public final class L {
 
 
     public static void e(Object msg) {
-        Logcat.e(msg);
+        Logcat.e(null, msg, null);
     }
 
     public static void e(String tag, Object msg) {
-        Logcat.e(tag, msg);
+        Logcat.e(tag, msg, null);
     }
 
     public static void e(Object msg, Throwable e) {
-        Logcat.e(msg, e);
+        Logcat.e(null, msg, e);
     }
 
     public static void e(String tag, Object msg, Throwable e) {
@@ -62,7 +62,7 @@ public final class L {
 
 
     public static void a(Object msg) {
-        Logcat.a(msg);
+        Logcat.a(null, msg);
     }
 
     public static void a(String tag, Object msg) {

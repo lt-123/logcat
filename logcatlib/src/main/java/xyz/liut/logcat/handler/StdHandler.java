@@ -7,8 +7,13 @@ import xyz.liut.logcat.LogLevel;
 import static xyz.liut.logcat.LogLevel.ERROR;
 
 /**
- * System.out
- * System.err
+ * 使用标准输出、标准错误输出打印Log
+ * <p>
+ * verbose：默认颜色
+ * debug：绿色
+ * info：蓝色
+ * warn：黄色
+ * error：红色
  */
 @SuppressWarnings({"WeakerAccess", "unused"})
 public class StdHandler implements LogHandler {
@@ -23,37 +28,55 @@ public class StdHandler implements LogHandler {
     public static final String ANSI_CYAN = "\u001B[36m";
     public static final String ANSI_WHITE = "\u001B[37m";
 
+    /**
+     * 是否使用 标准错误输出 打野 Error 级别 Log
+     */
+    private boolean useStdErr;
+
+    public StdHandler() {
+        this(false);
+    }
+
+    /**
+     * @param useStdErr 是否使用 标准错误输出 打野 Error 级别 Log
+     */
+    public StdHandler(boolean useStdErr) {
+        this.useStdErr = useStdErr;
+    }
 
     @Override
     public void log(LogLevel level, @NotNull String tag, @NotNull String msg) {
 
         String log = tag + ": " + msg;
 
-        switch (level) {
-            case VERBOSE:
-                break;
-            case DEBUG:
-                log = ANSI_GREEN + log;
-                break;
-            case INFO:
-                log = ANSI_BLUE + log;
-                break;
-            case WARN:
-                log = ANSI_YELLOW + log;
-                break;
-//            case ERROR:
-//                break;
-//            case ASSERT:
-//                break;
-        }
-
-        if (level == ERROR) {
+        if (useStdErr && level == ERROR) {
+            // 使用 err 打印
             System.err.println(log);
         } else {
+            // 配置颜色
+            switch (level) {
+                case VERBOSE:
+                    break;
+                case DEBUG:
+                    log = ANSI_GREEN + log;
+                    break;
+                case INFO:
+                    log = ANSI_BLUE + log;
+                    break;
+                case WARN:
+                    log = ANSI_YELLOW + log;
+                    break;
+                case ERROR:
+                    log = ANSI_RED + log;
+                    break;
+            }
+
+            // 打印 log
             System.out.println(log);
+            // 重置颜色
+            System.out.print(ANSI_RESET);
         }
 
-//        System.out.print(ANSI_RED);
 
     }
 }

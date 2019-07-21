@@ -22,22 +22,3 @@ fun Any?.logError(tag: String? = null, throwable: Throwable? = null) {
     L.e(tag, this, throwable)
 }
 
-
-//fun main() {
-//
-//    Logcat.getHandlers().add(StdHandler())
-//
-//    "verbose".logVerbose("----")
-//    "debug ".logDebug("----")
-//    "info ".logInfo("----")
-//    "warn ".logWarn("----")
-//    "error ".logError("----")
-//
-//
-//    "v 2".logVerbose("----")
-//    "d 2 ".logDebug("----")
-//    "i2 ".logInfo("----")
-//    "w2 ".logWarn("----")
-//    "e2 ha ".logError("----")
-//
-//}
