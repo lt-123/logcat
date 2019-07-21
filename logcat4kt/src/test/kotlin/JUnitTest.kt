@@ -47,6 +47,15 @@ class JUnitTest {
         "warn ".logWarn()
         "error ".logError()
 
+        println("-------关闭 log---------")
+        Logcat.setLevel(LogLevel.NO)
+
+        "verbose".logVerbose()
+        "debug ".logDebug()
+        "info ".logInfo()
+        "warn ".logWarn()
+        "error ".logError()
+
 
     }
 

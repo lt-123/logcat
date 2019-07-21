@@ -33,6 +33,12 @@ public enum LogLevel {
     /**
      * Priority constant for the println method.
      */
-    ASSERT
+    ASSERT,
+
+
+    /**
+     * no log
+     */
+    NO
 
 }
