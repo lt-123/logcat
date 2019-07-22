@@ -33,21 +33,31 @@ public class StdHandler implements LogHandler {
      */
     private boolean useStdErr;
 
+    /**
+     * 是否显示 TAG
+     */
+    private boolean showTag;
+
     public StdHandler() {
-        this(false);
+        this(false, true);
     }
 
     /**
      * @param useStdErr 是否使用 标准错误输出 打野 Error 级别 Log
+     * @param showTag   是否显示 tag
      */
-    public StdHandler(boolean useStdErr) {
+    public StdHandler(boolean useStdErr, boolean showTag) {
         this.useStdErr = useStdErr;
+        this.showTag = showTag;
     }
 
     @Override
     public void log(LogLevel level, @NotNull String tag, @NotNull String msg) {
-
-        String log = tag + ": " + msg;
+        String log;
+        if (showTag)
+            log = tag + ": " + msg;
+        else
+            log = msg;
 
         if (useStdErr && level == ERROR) {
             // 使用 err 打印
