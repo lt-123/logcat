@@ -17,6 +17,8 @@ import java.util.concurrent.locks.ReentrantLock;
 
 
 /**
+ * todo 使用阻塞队列重构
+ * <p>
  * 输出到文件
  * <p>
  * Create by liut on 2018/10/15 0015

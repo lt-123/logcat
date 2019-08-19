@@ -1,6 +1,9 @@
 apply plugin: 'com.android.library'
 apply plugin: 'com.novoda.bintray-release'
 
+sourceCompatibility = "8"
+targetCompatibility = "8"
+
 android {
     compileSdkVersion 28
     defaultConfig {
@@ -34,7 +37,7 @@ publish {
 dependencies {
     testImplementation group: 'junit', name: 'junit', version: '4.12'
 
-    implementation project(':logcatlib')
+    provided project(':logcatlib')
 }
 
 // 编译JAVA文件时采用UTF-8

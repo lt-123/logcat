@@ -3,6 +3,9 @@ plugins {
     id 'com.novoda.bintray-release'
 }
 
+sourceCompatibility = "8"
+targetCompatibility = "8"
+
 publish {
     userOrg = 'lt-123'
     repoName = 'maven'

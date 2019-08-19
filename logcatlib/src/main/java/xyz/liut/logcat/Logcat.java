@@ -125,6 +125,8 @@ public class Logcat {
     /**
      * 根据当前线程方法栈制作log_tag
      *
+     * todo 把 TAG 抽象出来
+     *
      * @return log tag
      */
     private static String makeTag() {

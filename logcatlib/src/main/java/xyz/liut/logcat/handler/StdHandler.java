@@ -82,9 +82,7 @@ public class StdHandler implements LogHandler {
             }
 
             // 打印 log
-            System.out.println(log);
-            // 重置颜色
-            System.out.print(ANSI_RESET);
+            System.out.println(log + ANSI_RESET);
         }
 
 
