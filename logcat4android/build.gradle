@@ -37,7 +37,9 @@ publish {
 dependencies {
     testImplementation group: 'junit', name: 'junit', version: '4.12'
 
-    provided project(':logcatlib')
+    // jb-anno
+    compileOnly 'org.jetbrains:annotations-java5:15.0'
+    compileOnly project(':logcatlib')
 }
 
 // 编译JAVA文件时采用UTF-8

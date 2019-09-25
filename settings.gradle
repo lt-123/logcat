@@ -1,3 +1,3 @@
 rootProject.name = 'logcat'
-include ':logcatlib', ':logcat4kt', ':logcat4android'
+include ':logcatlib', ':logcat4kt', ':logcat4android', ':AndroidDemo'
 

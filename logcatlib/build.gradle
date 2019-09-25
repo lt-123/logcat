@@ -17,10 +17,10 @@ publish {
 }
 
 dependencies {
-    testCompile group: 'junit', name: 'junit', version: '4.12'
+    testImplementation group: 'junit', name: 'junit', version: '4.12'
 
     // jb-anno
-    compile 'org.jetbrains:annotations-java5:15.0'
+    compileOnly 'org.jetbrains:annotations-java5:15.0'
 }
 
 // 编译JAVA文件时采用UTF-8
