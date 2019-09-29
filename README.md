@@ -1,6 +1,6 @@
 # Logcat
 
-[ ![Download](https://api.bintray.com/packages/lt-123/maven/logcat/images/download.svg?version=0.1.4) ](https://bintray.com/lt-123/maven/logcat/0.1.4/link)
+[ ![Download](https://api.bintray.com/packages/lt-123/maven/logcat/images/download.svg) ](https://bintray.com/lt-123/maven/logcat/)
 
 一个 Java 平台的简易的 log 工具。 可用于 Java、 kotlin、 Android。共三个模块， logcat 是基础包， logcat4kt, 是kotlin 的扩展， logcat4Android 内置了 AndroidLogcatHandler（使用安卓内置的Log工具输出）。 
 
@@ -8,18 +8,18 @@
   
     - Java
         ``` groovy
-        compile 'xyz.liut.logcat:logcat:0.1.0'
+        compile 'xyz.liut.logcat:logcat:xxx'
         ```
     - kotlin
         ``` groovy
-        compile 'xyz.liut.logcat:logcat:0.1.0'
-        compile 'xyz.liut.logcat:logcat4kt:0.1.0'
+        compile 'xyz.liut.logcat:logcat:xxx'
+        compile 'xyz.liut.logcat:logcat4kt:xxx'
         ```
     - android 
         ```groovy
-        implementation 'xyz.liut.logcat:logcat:0.1.0'
-        implementation 'xyz.liut.logcat:logcat4kt:0.1.0'
-        implementation 'xyz.liut.logcat:logcat4android:0.1.0'
+        implementation 'xyz.liut.logcat:logcat:xxx'
+        implementation 'xyz.liut.logcat:logcat4kt:xxx'
+        implementation 'xyz.liut.logcat:logcat4android:xxx'
         ```
 - 使用 以 kotlin 为例
 	``` kotlin

@@ -1,6 +1,6 @@
 @file:Suppress("NOTHING_TO_INLINE")
 
-package xyz.liut.logcat4kt
+package xyz.liut.logcat.kt
 
 import xyz.liut.logcat.L
 

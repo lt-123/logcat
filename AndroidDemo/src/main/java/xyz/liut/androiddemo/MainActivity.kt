@@ -6,8 +6,8 @@ import androidx.appcompat.app.AppCompatActivity
 import xyz.liut.logcat.L
 import xyz.liut.logcat.Logcat
 import xyz.liut.logcat.handler.StdHandler
-import xyz.liut.logcat4android.AndroidLogcatHandler
-import xyz.liut.logcat4kt.logDebug
+import xyz.liut.logcat.android.AndroidLogcatHandler
+import xyz.liut.logcat.kt.logDebug
 import xyz.liut.test.R
 
 class MainActivity : AppCompatActivity() {

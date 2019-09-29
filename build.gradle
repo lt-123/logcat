@@ -1,6 +1,6 @@
 buildscript {
 
-    ext.kotlin_version = '1.3.50'
+    ext.kotlin_version = '1.3.41'
 
     repositories {
         google()
@@ -19,7 +19,7 @@ buildscript {
 // lib 全局配置
 ext {
     libGroup = 'xyz.liut.logcat'
-    libVersion = '0.1.5'
+    libVersion = '0.1.6'
 }
 
 allprojects {

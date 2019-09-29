@@ -3,7 +3,11 @@ import xyz.liut.logcat.L
 import xyz.liut.logcat.LogLevel
 import xyz.liut.logcat.Logcat
 import xyz.liut.logcat.handler.StdHandler
-import xyz.liut.logcat4kt.*
+import xyz.liut.logcat.kt.logDebug
+import xyz.liut.logcat.kt.logInfo
+import xyz.liut.logcat.kt.logVerbose
+import xyz.liut.logcat.kt.logWarn
+import xyz.liut.logcat4kt.logError
 
 class JUnitTest {
 
