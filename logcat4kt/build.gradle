@@ -1,21 +1,21 @@
 plugins {
     id 'java'
     id 'org.jetbrains.kotlin.jvm'
-    id 'com.novoda.bintray-release'
+//    id 'com.novoda.bintray-release'
 }
 
 sourceCompatibility = "8"
 targetCompatibility = "8"
 
-publish {
-    userOrg = 'lt-123'
-    repoName = 'maven'
-    groupId = 'xyz.liut.logcat'
-    artifactId = 'logcat4kt'
-    publishVersion = version
-    desc = 'java logcat util'
-    website = 'https://github.com/lt-123/logcat'
-}
+//publish {
+//    userOrg = 'lt-123'
+//    repoName = 'maven'
+//    groupId = 'xyz.liut.logcat'
+//    artifactId = 'logcat4kt'
+//    publishVersion = version
+//    desc = 'java logcat util'
+//    website = 'https://github.com/lt-123/logcat'
+//}
 
 dependencies {
     testImplementation group: 'junit', name: 'junit', version: '4.12'
