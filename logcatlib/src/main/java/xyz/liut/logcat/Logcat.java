@@ -2,6 +2,8 @@ package xyz.liut.logcat;
 
 import org.jetbrains.annotations.Nullable;
 
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -104,27 +106,24 @@ public class Logcat {
         if (msg == null) {
             msg = "<null>";
         }
+
+        String msgStr = msg.toString();
+
         if (e != null) {
-            StackTraceElement[] elements = e.getStackTrace();
-            if (elements.length > 0) {
-                StringBuilder builder = new StringBuilder();
-                builder
-                        .append("\n").append(msg).append("\n")
-                        .append(e.getClass().getName()).append(": ").append(e.getMessage()).append("\n");
-                for (StackTraceElement element : elements) {
-                    builder.append("\tat ").append(element).append("\n");
-                }
-                msg = builder.toString();
-            }
+            ByteArrayOutputStream os = new ByteArrayOutputStream();
+            e.printStackTrace(new PrintStream(os));
+            msgStr = msg + "\n" + os.toString();
         }
+
+
         for (LogHandler handler : handlers) {
-            handler.log(logLevel, tag, msg.toString());
+            handler.log(logLevel, tag, msgStr);
         }
     }
 
     /**
      * 根据当前线程方法栈制作log_tag
-     *
+     * <p>
      * todo 把 TAG 抽象出来
      *
      * @return log tag
