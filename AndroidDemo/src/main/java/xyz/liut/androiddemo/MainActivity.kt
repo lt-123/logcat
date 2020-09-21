@@ -1,7 +1,7 @@
 package xyz.liut.androiddemo
 
 import android.os.Bundle
-import android.util.Log
+import android.os.Process
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import xyz.liut.logcat.L
@@ -21,7 +21,7 @@ class MainActivity : AppCompatActivity() {
         L
             .getDefault()
             .setLevel(LogLevel.VERBOSE)
-            .addHandler(AndroidLogcatHandler("DEMO"))
+            .addHandler(AndroidLogcatHandler("LOGCAT_" + Process.myPid() + "_"))
             .addHandler(StdHandler())
             .addHandler { _, tag, msg ->
                 runOnUiThread {
@@ -39,8 +39,6 @@ class MainActivity : AppCompatActivity() {
             "value = ${random.nextInt()}".logDebug()
         }
 
-        Log.wtf("liut", "test")
-        Log.wtf("liut", "test", NullPointerException("npe"))
     }
 
 }
