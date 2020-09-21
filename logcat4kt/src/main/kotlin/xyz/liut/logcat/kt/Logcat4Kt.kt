@@ -4,23 +4,50 @@ package xyz.liut.logcat.kt
 
 import xyz.liut.logcat.L
 
-inline fun Any?.logVerbose(tag: String? = null) {
-    L.v(tag, this)
+inline fun Any?.logVerbose(msg: String? = null) {
+    if (msg == null) {
+        L.v(this)
+    } else {
+        L.v("$msg: $this")
+    }
 }
 
-inline fun Any?.logDebug(tag: String? = null) {
-    L.d(tag, this)
+inline fun Any?.logDebug(msg: String? = null) {
+    if (msg == null) {
+        L.d(this)
+    } else {
+        L.d("$msg: $this")
+    }
 }
 
-inline fun Any?.logInfo(tag: String? = null) {
-    L.i(tag, this)
+inline fun Any?.logInfo(msg: String? = null) {
+    if (msg == null) {
+        L.i(this)
+    } else {
+        L.i("$msg: $this")
+    }
 }
 
-inline fun Any?.logWarn(tag: String? = null) {
-    L.w(tag, this)
+inline fun Any?.logWarn(msg: String? = null) {
+    if (msg == null) {
+        L.w(this)
+    } else {
+        L.w("$msg: $this")
+    }
 }
 
-inline fun Any?.logError(tag: String? = null, throwable: Throwable? = null) {
-    L.e(tag, this, throwable)
+inline fun Any?.logError(msg: String? = null, throwable: Throwable? = null) {
+    if (msg == null) {
+        L.e(this, throwable)
+    } else {
+        L.e("$msg: $this", throwable)
+    }
 }
 
+inline fun Throwable.wtf(msg: String? = null) {
+    if (msg == null) {
+        L.wtf(message, this)
+    } else {
+        L.wtf(msg, this)
+    }
+}

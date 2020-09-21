@@ -1,7 +1,9 @@
 package xyz.liut.logcat.android;
 
 import android.util.Log;
+
 import org.jetbrains.annotations.NotNull;
+
 import xyz.liut.logcat.LogHandler;
 import xyz.liut.logcat.LogLevel;
 import xyz.liut.logcat4android.BuildConfig;
@@ -33,7 +35,7 @@ public class AndroidLogcatHandler implements LogHandler {
 
         switch (level) {
             case ASSERT:
-//                Log.d(tag, msg);
+                Log.wtf(tag, msg);
                 break;
             case DEBUG:
                 Log.d(tag, msg);

@@ -1,6 +1,7 @@
 package xyz.liut.logcat.handler;
 
 import org.jetbrains.annotations.NotNull;
+
 import xyz.liut.logcat.LogHandler;
 import xyz.liut.logcat.LogLevel;
 
@@ -77,6 +78,7 @@ public class StdHandler implements LogHandler {
                     log = ANSI_YELLOW + log;
                     break;
                 case ERROR:
+                case ASSERT:
                     log = ANSI_RED + log;
                     break;
             }
