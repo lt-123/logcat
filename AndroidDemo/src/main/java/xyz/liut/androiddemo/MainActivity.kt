@@ -7,6 +7,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 import xyz.liut.logcat.L
 import xyz.liut.logcat.LogLevel
 import xyz.liut.logcat.android.AndroidLogcatHandler
+import xyz.liut.logcat.handler.RollbackFileHandler
 import xyz.liut.logcat.handler.StdHandler
 import xyz.liut.logcat.kt.logDebug
 import xyz.liut.test.R
@@ -18,11 +19,21 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        // 文件名
+        val fileNamePattern = "yyyy-MM-dd-HH-mm-ss'.log'"
+
         L
             .getDefault()
-            .setLevel(LogLevel.VERBOSE)
-            .addHandler(AndroidLogcatHandler("LOGCAT_" + Process.myPid() + "_"))
-            .addHandler(StdHandler())
+            .setLevel(LogLevel.VERBOSE) // 等级
+            .addHandler(AndroidLogcatHandler("LOGCAT_" + Process.myPid() + "_"))    //输出到控制台
+            .addHandler(StdHandler())   // 标准输出 System.out
+            .addHandler(
+                RollbackFileHandler(
+                    getExternalFilesDir("logcat").toString(),
+                    1,
+                    fileNamePattern
+                )
+            )   // 输出问文件
             .addHandler { _, tag, msg ->
                 runOnUiThread {
                     with(tv_txt) {
@@ -32,11 +43,10 @@ class MainActivity : AppCompatActivity() {
                         append(msg)
                     }
                 }
-            }
+            }   // 自定义输出
 
-        val random = Random(100)
         bt.setOnClickListener {
-            "value = ${random.nextInt()}".logDebug()
+            "value = ${Random.nextInt()}".logDebug()
         }
 
     }
