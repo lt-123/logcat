@@ -39,6 +39,30 @@ public enum LogLevel {
     /**
      * no log
      */
-    NO
+    NO;
+
+    /**
+     * 获取简称
+     */
+    public String getShortName() {
+        switch (this) {
+            case VERBOSE:
+                return "V";
+            case DEBUG:
+                return "D";
+            case INFO:
+                return "I";
+            case WARN:
+                return "W";
+            case ERROR:
+                return "E";
+            case ASSERT:
+                return "A";
+            case NO:
+                return "N";
+            default:
+                return "none";
+        }
+    }
 
 }
