@@ -26,7 +26,7 @@ class MainActivity : AppCompatActivity() {
             .getDefault()
             .setLevel(LogLevel.VERBOSE) // 等级
             .addHandler(AndroidLogcatHandler("LOGCAT_" + Process.myPid() + "_"))    //输出到控制台
-            .addHandler(StdHandler())   // 标准输出 System.out
+            .addHandler(StdHandler(false, true, false))   // 标准输出 System.out
             .addHandler(
                 RollbackFileHandler(
                     getExternalFilesDir("logcat").toString(),
