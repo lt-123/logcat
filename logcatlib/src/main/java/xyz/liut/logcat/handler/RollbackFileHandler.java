@@ -61,7 +61,6 @@ public class RollbackFileHandler implements LogHandler {
         this.week = week;
 
         format = new SimpleDateFormat(fileNamePattern, Locale.CHINA);
-        String fileName = format.format(new Date());
         // 生成 fileHandler
         fileHandler = new FileHandler(new File(dir, format.format(new Date())).toString());
         today = getToday();

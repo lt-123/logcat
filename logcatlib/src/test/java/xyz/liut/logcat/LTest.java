@@ -21,12 +21,29 @@ public class LTest {
     @Test
     public void LogTest() {
         L.v("verbose");
+        L.v("tag", "verbose");
+
         L.d("debug");
+        L.d("tag", "debug");
+
         L.i("info");
+        L.i("tag", "info");
+
         L.w("warn");
+        L.w("tag", "warn");
+        L.w("tag", "warn", new Throwable("warn test"));
+        L.w("warn", new Throwable("warn test"));
+
         L.e("error");
-        L.e("error test", new Throwable("err test"));
+        L.e("tag", "error");
+        L.e("tag", "error", new Throwable("error test"));
+        L.e("warn", new Throwable("error test"));
+
         L.wtf("wtf");
+        L.wtf("tag", "wtf");
+        L.wtf("tag", "wtf", new Throwable("wtf test"));
+        L.wtf("wtf", new Throwable("wtf test"));
+        L.wtf(new Throwable("wtf test"));
     }
 
 }

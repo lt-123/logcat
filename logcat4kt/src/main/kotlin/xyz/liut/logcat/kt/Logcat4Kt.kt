@@ -38,7 +38,7 @@ inline fun Any?.logWarn(msg: String? = null) {
 
 inline fun Any?.logError(msg: String? = null, throwable: Throwable? = null) {
     if (msg == null) {
-        L.e(this, throwable)
+        L.e("$this", throwable)
     } else {
         L.e("$msg: $this", throwable)
     }
