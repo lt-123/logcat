@@ -18,7 +18,7 @@ public class Logcat {
     /**
      * logHandler 集合
      */
-    private Set<LogHandler> handlers = new HashSet<>(2);
+    private final Set<LogHandler> handlers = new HashSet<>(2);
 
     /**
      * log 级别
@@ -78,7 +78,7 @@ public class Logcat {
      * @param msg   msg
      * @param e     exception
      */
-    void println(LogLevel level, String tag, Object msg, Throwable e) {
+    public void println(LogLevel level, String tag, Object msg, Throwable e) {
         if (level == null) {
             throw new NullPointerException("level 不可为空");
         }
@@ -96,7 +96,7 @@ public class Logcat {
      */
     private void outputLogcat(LogLevel logLevel, @Nullable String tag, Object msg, Throwable e) {
         if (handlers.size() == 0) {
-            System.out.println("当前没有 LogHandler " + msg);
+            System.err.println("No LogHandler " + msg);
             return;
         }
 
@@ -124,8 +124,6 @@ public class Logcat {
 
     /**
      * 根据当前线程方法栈制作log_tag
-     * <p>
-     * todo 把 TAG 抽象出来
      *
      * @return log tag
      */

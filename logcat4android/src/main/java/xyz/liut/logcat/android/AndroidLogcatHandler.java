@@ -1,12 +1,12 @@
 package xyz.liut.logcat.android;
 
+import android.text.TextUtils;
 import android.util.Log;
 
 import org.jetbrains.annotations.NotNull;
 
 import xyz.liut.logcat.LogHandler;
 import xyz.liut.logcat.LogLevel;
-import xyz.liut.logcat4android.BuildConfig;
 
 /**
  * android logcat
@@ -19,19 +19,17 @@ public class AndroidLogcatHandler implements LogHandler {
 
     private final String BASE_TAG;
 
-    private final boolean NEED_TAG = !BuildConfig.DEBUG;
-
     /**
-     * @param baseTag tag 前缀
+     * @param prefix tag 前缀
      */
-    public AndroidLogcatHandler(String baseTag) {
-        BASE_TAG = baseTag;
+    public AndroidLogcatHandler(String prefix) {
+        BASE_TAG = prefix;
     }
 
 
     @Override
     public void log(LogLevel level, @NotNull String tag, @NotNull String msg) {
-        if (NEED_TAG) {
+        if (!TextUtils.isEmpty(BASE_TAG)) {
             tag = BASE_TAG + tag;
         }
 

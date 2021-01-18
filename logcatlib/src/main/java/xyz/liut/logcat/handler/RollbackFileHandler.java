@@ -27,14 +27,14 @@ public class RollbackFileHandler implements LogHandler {
     private static final long CHECK_FILES_INTERVAL = 1000 * 60 * 60 * 24;
 
     /**
-     * 装饰者模式
+     * 组合
      */
-    private FileHandler fileHandler;
+    private final FileHandler fileHandler;
 
     /**
      * 文件名格式化工具
      */
-    private SimpleDateFormat format;
+    private final SimpleDateFormat format;
 
     /**
      * 今天0点的时间
@@ -44,12 +44,12 @@ public class RollbackFileHandler implements LogHandler {
     /**
      * 目标文件夹
      */
-    private String dir;
+    private final String dir;
 
     /**
      * 存留时间, 周数
      */
-    private int week;
+    private final int week;
 
     /**
      * @param dir             目标文件夹

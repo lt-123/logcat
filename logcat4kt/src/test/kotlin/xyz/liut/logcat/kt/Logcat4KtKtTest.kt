@@ -36,23 +36,25 @@ class Logcat4KtKtTest {
     }
 
     private fun test() {
-        "verbose".logVerbose()
-        "debug ".logDebug()
-        "info ".logInfo()
-        "warn ".logWarn()
-        "error ".logError()
+        logVerbose("verbose")
+        logDebug("debug")
+        logInfo("info")
+        logWarn("warn")
+        logError("error")
+        logWtf("what the fuck")
 
         println("----")
 
-        "verbose".logVerbose("test")
-        "debug ".logDebug("test")
-        "info ".logInfo("test")
-        "warn ".logWarn("test")
-        "error ".logError("test")
+        logVerbose("verbose", tag = "tag")
+        logDebug("debug", tag = "tag")
+        logInfo("info", tag = "tag")
+        logWarn("warn", tag = "tag")
+        logError("error", tag = "tag")
+        logWtf("what the fuck", tag = "tag")
 
         println("----")
 
-        NullPointerException("npe").wtf("fuck")
+        NullPointerException("npe").printLogcat()
     }
 
 }

@@ -16,7 +16,6 @@ import static xyz.liut.logcat.LogLevel.ERROR;
  * warn：黄色
  * error：红色
  */
-@SuppressWarnings({"WeakerAccess", "unused"})
 public class StdHandler implements LogHandler {
 
     public static final String ANSI_RESET = "\u001B[0m";
@@ -32,17 +31,17 @@ public class StdHandler implements LogHandler {
     /**
      * 是否使用 标准错误输出 打野 Error 级别 Log
      */
-    private boolean useStdErr;
+    private final boolean useStdErr;
 
     /**
      * 是否显示 TAG
      */
-    private boolean showTag;
+    private final boolean showTag;
 
     /**
      * ANSI 颜色
      */
-    private boolean ansiColor;
+    private final boolean ansiColor;
 
     public StdHandler() {
         this(false, true, true);

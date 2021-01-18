@@ -30,11 +30,11 @@ public class FileHandler implements LogHandler {
     /**
      * log 队列
      */
-    private BlockingQueue<String> texts;
+    private final BlockingQueue<String> texts;
 
-    private PrintRunnable runnable;
+    private final PrintRunnable runnable;
 
-    private SimpleDateFormat format;
+    private final SimpleDateFormat format;
 
     public FileHandler(String file) {
         texts = new LinkedBlockingQueue<>();
@@ -68,7 +68,7 @@ public class FileHandler implements LogHandler {
 
     private static class PrintRunnable implements Runnable {
 
-        private BlockingQueue<String> texts;
+        private final BlockingQueue<String> texts;
         private volatile String file;
 
         private volatile boolean running;

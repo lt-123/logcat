@@ -15,10 +15,16 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/tv_txt"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="text" />
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/tv_txt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="text" />
+
+    </ScrollView>
 
 </LinearLayout>
