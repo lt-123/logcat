@@ -1,5 +1,4 @@
 apply plugin: 'com.android.library'
-//apply plugin: 'com.novoda.bintray-release'
 
 sourceCompatibility = "8"
 targetCompatibility = "8"
@@ -24,25 +23,10 @@ android {
     }
 }
 
-//publish {
-//    userOrg = 'lt-123'
-//    repoName = 'maven'
-//    groupId = 'xyz.liut.logcat'
-//    artifactId = 'logcat4android'
-//    publishVersion = version
-//    desc = 'java logcat util'
-//    website = 'https://github.com/lt-123/logcat'
-//}
-
 dependencies {
-    testImplementation group: 'junit', name: 'junit', version: '4.12'
+    testImplementation 'junit:junit:4.13.1'
 
     // jb-anno
     compileOnly 'org.jetbrains:annotations-java5:15.0'
     compileOnly project(':logcatlib')
-}
-
-// 编译JAVA文件时采用UTF-8
-tasks.withType(JavaCompile) {
-    options.encoding = "UTF-8"
 }

@@ -1,6 +1,12 @@
+// 全局配置
+ext {
+    libGroup = 'xyz.liut.logcat'
+    libVersion = '1.1.0'
+}
+
 buildscript {
 
-    ext.kotlin_version = '1.4.10'
+    ext.kotlin_version = '1.4.21'
 
     repositories {
         google()
@@ -10,19 +16,11 @@ buildscript {
     dependencies {
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         // android
-        classpath 'com.android.tools.build:gradle:4.0.1'
-        // j frog
-        classpath 'com.novoda:bintray-release:0.9.1'
+        classpath 'com.android.tools.build:gradle:4.1.2'
     }
 }
 
-// lib 全局配置
-ext {
-    libGroup = 'xyz.liut.logcat'
-    libVersion = '0.1.6'
-}
-
-allprojects {
+subprojects {
 
     group libGroup
     version libVersion
@@ -31,6 +29,11 @@ allprojects {
         jcenter()
         mavenCentral()
         google()
+    }
+
+    // 编译JAVA文件时采用UTF-8
+    tasks.withType(JavaCompile) {
+        options.encoding = "UTF-8"
     }
 
 }
