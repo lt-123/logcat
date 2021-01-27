@@ -1,33 +1,22 @@
 plugins {
     id 'java'
     id 'org.jetbrains.kotlin.jvm'
-    id 'com.novoda.bintray-release'
+    id "maven-publish"
+    id "com.jfrog.bintray"  version "1.8.5"
 }
+
 
 sourceCompatibility = "8"
 targetCompatibility = "8"
 
-publish {
-    userOrg = 'lt-123'
-    repoName = 'maven'
-    groupId = 'xyz.liut.logcat'
-    artifactId = 'logcat4kt'
-    publishVersion = version
-    desc = 'java logcat util'
-    website = 'https://github.com/lt-123/logcat'
-}
-
 dependencies {
-    testImplementation group: 'junit', name: 'junit', version: '4.12'
+    testImplementation 'junit:junit:4.13.1'
 
-    testImplementation project(':logcatlib')
+    testImplementation project(':logcat')
     testImplementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
-//    compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
-
-    //noinspection DifferentStdlibGradleVersion
     compileOnly "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    compileOnly project(':logcatlib')
+    compileOnly project(':logcat')
 }
 
 compileKotlin {
@@ -38,19 +27,15 @@ compileTestKotlin {
 }
 
 
-// 编译JAVA文件时采用UTF-8
-tasks.withType(JavaCompile) {
-    options.encoding = "UTF-8"
-}
+apply from: "${rootDir}/publish-jcenter.gradle"
 
-// 生成javadoc出现编码问题添加
-javadoc {
-    options {
-        encoding "UTF-8"
-        charSet 'UTF-8'
-        author true
-        version version
-        links "http://docs.oracle.com/javase/7/docs/api"
-        title "logcat doc"
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            from components.java
+            groupId libGroup
+            version libVersion
+            artifactId project.name
+        }
     }
 }

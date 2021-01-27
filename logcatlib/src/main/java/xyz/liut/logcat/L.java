@@ -6,67 +6,100 @@ package xyz.liut.logcat;
  * <p>
  * Create by liut on 2018/10/15 0015
  */
-@SuppressWarnings("unused")
 public final class L {
 
+    private static final Logcat DEFAULT = new Logcat();
+
+    public static Logcat getDefault() {
+        return DEFAULT;
+    }
+
+    // --------------------------VERBOSE------------------------------------------------------------
+
     public static void v(Object msg) {
-        Logcat.v(null, msg);
+        DEFAULT.println(LogLevel.VERBOSE, null, msg, null);
     }
 
     public static void v(String tag, Object msg) {
-        Logcat.v(tag, msg);
+        DEFAULT.println(LogLevel.VERBOSE, tag, msg, null);
     }
 
+    // --------------------------DEBUG--------------------------------------------------------------
+
     public static void d(Object msg) {
-        Logcat.d(null, msg);
+        DEFAULT.println(LogLevel.DEBUG, null, msg, null);
     }
 
     public static void d(String tag, Object msg) {
-        Logcat.d(tag, msg);
+        DEFAULT.println(LogLevel.DEBUG, tag, msg, null);
     }
 
+    // --------------------------INFO---------------------------------------------------------------
 
     public static void i(Object msg) {
-        Logcat.i(null, msg);
+        DEFAULT.println(LogLevel.INFO, null, msg, null);
     }
 
     public static void i(String tag, Object msg) {
-        Logcat.i(tag, msg);
+        DEFAULT.println(LogLevel.INFO, tag, msg, null);
     }
 
+    // ---------------------------WARN--------------------------------------------------------------
 
     public static void w(Object msg) {
-        Logcat.w(null, msg);
+        DEFAULT.println(LogLevel.WARN, null, msg, null);
     }
 
-    public static void w(String tag, Object msg) {
-        Logcat.w(tag, msg);
+    public static void w(String tag, String msg) {
+        DEFAULT.println(LogLevel.WARN, tag, msg, null);
     }
 
+    public static void w(String tag, String msg, Throwable e) {
+        DEFAULT.println(LogLevel.WARN, tag, msg, e);
+    }
+
+    public static void w(String msg, Throwable e) {
+        DEFAULT.println(LogLevel.WARN, null, msg, e);
+    }
+
+    // -------------------------ERROR---------------------------------------------------------------
 
     public static void e(Object msg) {
-        Logcat.e(null, msg, null);
+        DEFAULT.println(LogLevel.ERROR, null, msg, null);
     }
 
-    public static void e(String tag, Object msg) {
-        Logcat.e(tag, msg, null);
+    public static void e(String tag, String msg) {
+        DEFAULT.println(LogLevel.ERROR, tag, msg, null);
     }
 
-    public static void e(Object msg, Throwable e) {
-        Logcat.e(null, msg, e);
+    public static void e(String tag, String msg, Throwable e) {
+        DEFAULT.println(LogLevel.ERROR, tag, msg, e);
     }
 
-    public static void e(String tag, Object msg, Throwable e) {
-        Logcat.e(tag, msg, e);
+    public static void e(String msg, Throwable e) {
+        DEFAULT.println(LogLevel.ERROR, null, msg, e);
     }
 
+    // ------------------------ASSERT---------------------------------------------------------------
 
-    public static void a(Object msg) {
-        Logcat.a(null, msg);
+    public static void wtf(Throwable e) {
+        DEFAULT.println(LogLevel.ASSERT, null, null, e);
     }
 
-    public static void a(String tag, Object msg) {
-        Logcat.a(tag, msg);
+    public static void wtf(String msg) {
+        DEFAULT.println(LogLevel.ASSERT, null, msg, new Throwable("wtf"));
+    }
+
+    public static void wtf(String tag, String msg) {
+        DEFAULT.println(LogLevel.ASSERT, tag, msg, new Throwable("wtf"));
+    }
+
+    public static void wtf(String tag, String msg, Throwable e) {
+        DEFAULT.println(LogLevel.ASSERT, tag, msg, e);
+    }
+
+    public static void wtf(String msg, Throwable e) {
+        DEFAULT.println(LogLevel.ASSERT, null, msg, e);
     }
 
 

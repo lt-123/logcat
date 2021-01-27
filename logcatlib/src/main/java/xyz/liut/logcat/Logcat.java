@@ -2,6 +2,8 @@ package xyz.liut.logcat;
 
 import org.jetbrains.annotations.Nullable;
 
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -11,33 +13,47 @@ import java.util.Set;
  * <p>
  * Create by liut on 2018/10/15 0015
  */
-@SuppressWarnings({"unused"})
 public class Logcat {
 
     /**
      * logHandler 集合
      */
-    private final static Set<LogHandler> handlers = new HashSet<>(1);
+    private final Set<LogHandler> handlers = new HashSet<>(2);
 
     /**
      * log 级别
      */
-    private static volatile LogLevel level = LogLevel.VERBOSE;
+    private volatile LogLevel level = LogLevel.VERBOSE;
 
     /**
-     * 获取 logHandler 列表
-     *
-     * @return 列表
+     * 添加 LogHandler
      */
-    public static Set<LogHandler> getHandlers() {
-        return handlers;
+    public Logcat addHandler(LogHandler handler) {
+        handlers.add(handler);
+        return this;
+    }
+
+    /**
+     * 去除 LogHandler
+     */
+    public Logcat removeHandler(LogHandler handler) {
+        handlers.remove(handler);
+        return this;
+    }
+
+    /**
+     * 清空 LogHandler
+     */
+    public Logcat clearHandler() {
+        handlers.clear();
+        return this;
     }
 
 
     /**
      * @return 旧的级别
      */
-    public static LogLevel getLevel() {
+    public LogLevel getLevel() {
         return level;
     }
 
@@ -46,43 +62,30 @@ public class Logcat {
      *
      * @param level 新级别
      */
-    public static void setLevel(LogLevel level) {
-        Logcat.level = level;
+    public Logcat setLevel(LogLevel level) {
+        this.level = level;
+        return this;
     }
 
 
 // ==================================================================================================
 
-    static void v(String tag, Object msg) {
-        if (LogLevel.VERBOSE.compareTo(level) > -1)
-            outputLogcat(LogLevel.VERBOSE, tag, msg, null);
+    /**
+     * 输出 logcat
+     *
+     * @param level 等级
+     * @param tag   tag
+     * @param msg   msg
+     * @param e     exception
+     */
+    public void println(LogLevel level, String tag, Object msg, Throwable e) {
+        if (level == null) {
+            throw new NullPointerException("level 不可为空");
+        }
+        if (level.compareTo(this.level) > -1) {
+            outputLogcat(level, tag, msg, e);
+        }
     }
-
-    static void d(String tag, Object msg) {
-        if (LogLevel.DEBUG.compareTo(level) > -1)
-            outputLogcat(LogLevel.DEBUG, tag, msg, null);
-    }
-
-    static void i(String tag, Object msg) {
-        if (LogLevel.INFO.compareTo(level) > -1)
-            outputLogcat(LogLevel.INFO, tag, msg, null);
-    }
-
-    static void w(String tag, Object msg) {
-        if (LogLevel.WARN.compareTo(level) > -1)
-            outputLogcat(LogLevel.WARN, tag, msg, null);
-    }
-
-    static void e(String tag, Object msg, Throwable e) {
-        if (LogLevel.ERROR.compareTo(level) > -1)
-            outputLogcat(LogLevel.ERROR, tag, msg, e);
-    }
-
-    static void a(String tag, Object msg) {
-        if (LogLevel.ASSERT.compareTo(level) > -1)
-            outputLogcat(LogLevel.ASSERT, tag, msg, null);
-    }
-
 
     /**
      * 输出logcat到已注册的LogHandler
@@ -91,9 +94,9 @@ public class Logcat {
      * @param tag      log tag
      * @param msg      log content
      */
-    private static void outputLogcat(LogLevel logLevel, @Nullable String tag, Object msg, Throwable e) {
+    private void outputLogcat(LogLevel logLevel, @Nullable String tag, Object msg, Throwable e) {
         if (handlers.size() == 0) {
-            System.out.println("当前没有 LogHandler " + msg);
+            System.err.println("No LogHandler " + msg);
             return;
         }
 
@@ -104,32 +107,27 @@ public class Logcat {
         if (msg == null) {
             msg = "<null>";
         }
+
+        String msgStr = msg.toString();
+
         if (e != null) {
-            StackTraceElement[] elements = e.getStackTrace();
-            if (elements.length > 0) {
-                StringBuilder builder = new StringBuilder();
-                builder
-                        .append("\n").append(msg).append("\n")
-                        .append(e.getClass().getName()).append(": ").append(e.getMessage()).append("\n");
-                for (StackTraceElement element : elements) {
-                    builder.append("\tat ").append(element).append("\n");
-                }
-                msg = builder.toString();
-            }
+            ByteArrayOutputStream os = new ByteArrayOutputStream();
+            e.printStackTrace(new PrintStream(os));
+            msgStr = msg + "\n" + os.toString();
         }
+
+
         for (LogHandler handler : handlers) {
-            handler.log(logLevel, tag, msg.toString());
+            handler.log(logLevel, tag, msgStr);
         }
     }
 
     /**
      * 根据当前线程方法栈制作log_tag
      *
-     * todo 把 TAG 抽象出来
-     *
      * @return log tag
      */
-    private static String makeTag() {
+    private String makeTag() {
         String tag = "<none>";
         try {
             StackTraceElement[] elements = Thread.currentThread().getStackTrace();
@@ -151,8 +149,9 @@ public class Logcat {
                                     tag = "<" + str[str.length - 1] + ">";
                                 }
                             }
-                            tag = tag + "_" + element.getLineNumber();
+                            tag = tag + "#" + element.getLineNumber();
                             tag = tag.replace(".java", "");
+                            tag = tag.replace(".kt", "");
                             break;
                         }
                     }

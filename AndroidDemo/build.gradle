@@ -4,7 +4,6 @@ apply plugin: 'kotlin-android-extensions'
 
 android {
     compileSdkVersion 29
-    buildToolsVersion "29.0.0"
     defaultConfig {
         applicationId "xyz.liut.androiddemo"
         minSdkVersion 21
@@ -13,10 +12,21 @@ android {
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
+
+    signingConfigs {
+        key {
+            keyAlias 'logcat'
+            keyPassword '78456123'
+            storeFile file('keystore.jks')
+            storePassword '12345678'
+        }
+    }
+
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.key
         }
     }
 }
@@ -33,7 +43,7 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 
 
-    implementation project(path: ':logcatlib')
+    implementation project(path: ':logcat')
     implementation project(path: ':logcat4kt')
     implementation project(path: ':logcat4android')
 }

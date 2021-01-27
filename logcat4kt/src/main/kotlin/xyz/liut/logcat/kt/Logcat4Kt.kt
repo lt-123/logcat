@@ -3,24 +3,43 @@
 package xyz.liut.logcat.kt
 
 import xyz.liut.logcat.L
+import xyz.liut.logcat.LogLevel
 
-inline fun Any?.logVerbose(tag: String? = null) {
-    L.v(tag, this)
+
+inline fun logVerbose(msg: Any?, tag: String? = null) {
+    L.v(tag, msg)
 }
 
-inline fun Any?.logDebug(tag: String? = null) {
-    L.d(tag, this)
+inline fun logDebug(msg: Any?, tag: String? = null) {
+    L.d(tag, msg)
 }
 
-inline fun Any?.logInfo(tag: String? = null) {
-    L.i(tag, this)
+inline fun logInfo(msg: Any?, tag: String? = null) {
+    L.i(tag, msg)
 }
 
-inline fun Any?.logWarn(tag: String? = null) {
-    L.w(tag, this)
+inline fun logWarn(msg: Any?, tag: String? = null, throwable: Throwable? = null) {
+    L.w(tag, msg?.toString(), throwable)
 }
 
-inline fun Any?.logError(tag: String? = null, throwable: Throwable? = null) {
-    L.e(tag, this, throwable)
+inline fun logError(msg: Any?, tag: String? = null, throwable: Throwable? = null) {
+    L.e(tag, msg?.toString(), throwable)
+}
+
+inline fun logWtf(msg: Any?, tag: String? = null, throwable: Throwable? = null) {
+    if (throwable != null) {
+        L.wtf(tag, msg?.toString(), throwable)
+
+    } else {
+        L.wtf(tag, msg?.toString(), Exception(msg?.toString()))
+    }
+}
+
+inline fun Throwable.printLogcat(
+    msg: Any? = null,
+    tag: String? = null,
+    level: LogLevel = LogLevel.WARN
+) {
+    L.getDefault().println(level, tag, msg ?: "", this)
 }
 

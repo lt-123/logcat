@@ -1,6 +1,7 @@
 package xyz.liut.logcat.handler;
 
 import org.jetbrains.annotations.NotNull;
+
 import xyz.liut.logcat.LogHandler;
 import xyz.liut.logcat.LogLevel;
 
@@ -15,7 +16,6 @@ import static xyz.liut.logcat.LogLevel.ERROR;
  * warn：黄色
  * error：红色
  */
-@SuppressWarnings({"WeakerAccess", "unused"})
 public class StdHandler implements LogHandler {
 
     public static final String ANSI_RESET = "\u001B[0m";
@@ -31,24 +31,31 @@ public class StdHandler implements LogHandler {
     /**
      * 是否使用 标准错误输出 打野 Error 级别 Log
      */
-    private boolean useStdErr;
+    private final boolean useStdErr;
 
     /**
      * 是否显示 TAG
      */
-    private boolean showTag;
+    private final boolean showTag;
+
+    /**
+     * ANSI 颜色
+     */
+    private final boolean ansiColor;
 
     public StdHandler() {
-        this(false, true);
+        this(false, true, true);
     }
 
     /**
      * @param useStdErr 是否使用 标准错误输出 打野 Error 级别 Log
      * @param showTag   是否显示 tag
+     * @param ansiColor 是否使用 ANSI 颜色 (需要终端支持)
      */
-    public StdHandler(boolean useStdErr, boolean showTag) {
+    public StdHandler(boolean useStdErr, boolean showTag, boolean ansiColor) {
         this.useStdErr = useStdErr;
         this.showTag = showTag;
+        this.ansiColor = ansiColor;
     }
 
     @Override
@@ -63,26 +70,32 @@ public class StdHandler implements LogHandler {
             // 使用 err 打印
             System.err.println(log);
         } else {
-            // 配置颜色
-            switch (level) {
-                case VERBOSE:
-                    break;
-                case DEBUG:
-                    log = ANSI_GREEN + log;
-                    break;
-                case INFO:
-                    log = ANSI_BLUE + log;
-                    break;
-                case WARN:
-                    log = ANSI_YELLOW + log;
-                    break;
-                case ERROR:
-                    log = ANSI_RED + log;
-                    break;
-            }
+            if (ansiColor) {
+                // 配置颜色
+                switch (level) {
+                    case VERBOSE:
+                        break;
+                    case DEBUG:
+                        log = ANSI_GREEN + log;
+                        break;
+                    case INFO:
+                        log = ANSI_BLUE + log;
+                        break;
+                    case WARN:
+                        log = ANSI_YELLOW + log;
+                        break;
+                    case ERROR:
+                    case ASSERT:
+                        log = ANSI_RED + log;
+                        break;
+                }
 
-            // 打印 log
-            System.out.println(log + ANSI_RESET);
+                // 打印 log
+                System.out.println(log + ANSI_RESET);
+            } else {
+                // 打印 log
+                System.out.println(log);
+            }
         }
 
 

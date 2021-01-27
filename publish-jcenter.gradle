@@ -1,0 +1,38 @@
+ext {
+    desc = "Logcat on JVM"
+
+    websiteUrl = "https://github.com/lt-123/logcat"
+}
+
+
+bintray {
+    Properties local = new Properties()
+    File file = new File("${rootDir}/local.properties")
+    if (file.exists()) local.load(new FileInputStream(file))
+
+    user = local.getProperty("user")
+    key = local.getProperty("key")
+
+    println user
+    println key
+
+    publications = ['mavenJava']
+
+    dryRun = false      //[Default: false] Whether to run this as dry-run, without deploying
+    publish = true      //[Default: false] Whether version should be auto published after an upload
+    override = true     //[Default: false] Whether to override version artifacts already published
+
+    pkg {
+        repo = 'maven'
+        name = project.name
+
+        //An optional organization name when the repo belongs to one of the user's orgs
+        desc = "logcat"
+        websiteUrl = websiteUrl
+        issueTrackerUrl = websiteUrl + '/issues'
+        vcsUrl = "${websiteUrl}.git"
+        licenses = ['Apache-2.0']
+//        labels = pluginTags
+        publicDownloadNumbers = true
+    }
+}
