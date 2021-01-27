@@ -1,7 +1,10 @@
 plugins {
     id 'java'
     id 'org.jetbrains.kotlin.jvm'
+    id "maven-publish"
+    id "com.jfrog.bintray"  version "1.8.5"
 }
+
 
 sourceCompatibility = "8"
 targetCompatibility = "8"
@@ -9,11 +12,11 @@ targetCompatibility = "8"
 dependencies {
     testImplementation 'junit:junit:4.13.1'
 
-    testImplementation project(':logcatlib')
+    testImplementation project(':logcat')
     testImplementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
     compileOnly "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    compileOnly project(':logcatlib')
+    compileOnly project(':logcat')
 }
 
 compileKotlin {
@@ -21,4 +24,18 @@ compileKotlin {
 }
 compileTestKotlin {
     kotlinOptions.jvmTarget = "1.6"
+}
+
+
+apply from: "${rootDir}/publish-jcenter.gradle"
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            from components.java
+            groupId libGroup
+            version libVersion
+            artifactId project.name
+        }
+    }
 }

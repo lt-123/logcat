@@ -1,7 +1,7 @@
 // 全局配置
 ext {
     libGroup = 'xyz.liut.logcat'
-    libVersion = '1.1.0'
+    libVersion = '1.1.2'
 }
 
 buildscript {
@@ -37,6 +37,16 @@ subprojects {
     }
 
 }
+
+//gradle.projectsEvaluated {
+//    subprojects {
+//        println("name = $name")
+//
+//        if ("AndroidDemo" != name) {
+//            project.apply from: "${rootDir}/publish-jcenter.gradle"
+//        }
+//    }
+//}
 
 task clean(type: Delete) {
     delete rootProject.buildDir

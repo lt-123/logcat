@@ -4,7 +4,6 @@ apply plugin: 'kotlin-android-extensions'
 
 android {
     compileSdkVersion 29
-    buildToolsVersion "29.0.0"
     defaultConfig {
         applicationId "xyz.liut.androiddemo"
         minSdkVersion 21
@@ -44,7 +43,7 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 
 
-    implementation project(path: ':logcatlib')
+    implementation project(path: ':logcat')
     implementation project(path: ':logcat4kt')
     implementation project(path: ':logcat4android')
 }
