@@ -1,45 +1,123 @@
-@file:Suppress("NOTHING_TO_INLINE")
-
 package xyz.liut.logcat.kt
 
 import xyz.liut.logcat.L
 import xyz.liut.logcat.LogLevel
+import xyz.liut.logcat.Logcat
 
-
-inline fun logVerbose(msg: Any?, tag: String? = null) {
-    L.v(tag, msg)
+/**
+ * verbose 级别日志输出
+ *
+ * @param logcat 输出到的 logcat
+ * @param tag 日志标签
+ * @param msgBlock 日志体
+ */
+inline fun logVerbose(tag: String? = null, logcat: Logcat? = null, msgBlock: () -> Any?) {
+    printlnLogcat(logcat, LogLevel.VERBOSE, tag, msgBlock.invoke(), null)
 }
 
-inline fun logDebug(msg: Any?, tag: String? = null) {
-    L.d(tag, msg)
+/**
+ * info
+ *
+ * @param logcat 输出到的 logcat
+ * @param tag 日志标签
+ * @param msgBlock 日志体
+ */
+inline fun logDebug(tag: String? = null, logcat: Logcat? = null, msgBlock: () -> Any?) {
+    printlnLogcat(logcat, LogLevel.DEBUG, tag, msgBlock.invoke(), null)
 }
 
-inline fun logInfo(msg: Any?, tag: String? = null) {
-    L.i(tag, msg)
+/**
+ * info
+ *
+ * @param logcat 输出到的 logcat
+ * @param tag 日志标签
+ * @param msgBlock 日志体
+ */
+inline fun logInfo(tag: String? = null, logcat: Logcat? = null, msgBlock: () -> Any?) {
+    printlnLogcat(logcat, LogLevel.INFO, tag, msgBlock.invoke(), null)
 }
 
-inline fun logWarn(msg: Any?, tag: String? = null, throwable: Throwable? = null) {
-    L.w(tag, msg?.toString(), throwable)
-}
-
-inline fun logError(msg: Any?, tag: String? = null, throwable: Throwable? = null) {
-    L.e(tag, msg?.toString(), throwable)
-}
-
-inline fun logWtf(msg: Any?, tag: String? = null, throwable: Throwable? = null) {
-    if (throwable != null) {
-        L.wtf(tag, msg?.toString(), throwable)
-
-    } else {
-        L.wtf(tag, msg?.toString(), Exception(msg?.toString()))
-    }
-}
-
-inline fun Throwable.printLogcat(
-    msg: Any? = null,
+/**
+ * warn
+ *
+ * @param logcat 输出到的 logcat
+ * @param tag 日志标签
+ * @param msgBlock 日志体
+ * @param throwable 异常
+ */
+inline fun logWarn(
     tag: String? = null,
-    level: LogLevel = LogLevel.WARN
+    logcat: Logcat? = null,
+    throwable: Throwable? = null,
+    msgBlock: () -> Any?
 ) {
-    L.getDefault().println(level, tag, msg ?: "", this)
+    printlnLogcat(logcat, LogLevel.WARN, tag, msgBlock.invoke(), throwable)
 }
 
+/**
+ * error
+ *
+ * @param logcat 输出到的 logcat
+ * @param tag 日志标签
+ * @param msgBlock 日志体
+ * @param throwable 异常
+ */
+inline fun logError(
+    tag: String? = null,
+    throwable: Throwable? = null,
+    logcat: Logcat? = null,
+    msgBlock: () -> Any?
+) {
+    printlnLogcat(logcat, LogLevel.ERROR, tag, msgBlock.invoke(), throwable)
+}
+
+/**
+ * assert
+ *
+ * @param logcat 输出到的 logcat
+ * @param tag 日志标签
+ * @param msgBlock 日志体
+ * @param throwable 异常, 为空时会自动生成一个
+ */
+inline fun logWtf(
+    tag: String? = null,
+    throwable: Throwable? = null,
+    logcat: Logcat? = null,
+    msgBlock: () -> Any?
+) {
+    val msg = msgBlock.invoke()?.toString()
+    val e = throwable ?: Throwable(msg)
+    printlnLogcat(logcat, LogLevel.ASSERT, tag, msg, e)
+}
+
+/**
+ * 打印 throwable
+ */
+fun Throwable.printLogcat(
+    tag: String? = null,
+    logcat: Logcat? = null,
+    level: LogLevel = LogLevel.WARN,
+    msgBlock: (() -> Any?)? = null
+) {
+    printlnLogcat(logcat, level, tag, msgBlock?.invoke()?.toString() ?: message, this)
+}
+
+/**
+ * 日志输出
+ *
+ * @param logcat 输出到的 logcat
+ * @param level 日志等级
+ * @param tag 日志标签
+ * @param msg 日志体
+ * @param throwable 异常
+ */
+@Suppress("NOTHING_TO_INLINE")
+inline fun printlnLogcat(
+    logcat: Logcat?,
+    level: LogLevel?,
+    tag: String?,
+    msg: Any?,
+    throwable: Throwable?
+) {
+    (logcat ?: L.getDefault()).println(level, tag, msg, throwable)
+}

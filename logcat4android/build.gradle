@@ -28,14 +28,19 @@ android {
 }
 
 dependencies {
-    testImplementation 'junit:junit:4.13.1'
+    testImplementation 'junit:junit:4.13.2'
 
     // jb-anno
     compileOnly 'org.jetbrains:annotations-java5:15.0'
-    compileOnly project(':logcat')
+    compileOnly project(':logcat-core')
 }
 
 apply from: "${rootDir}/publish-jcenter.gradle"
+
+task androidSourcesJar(type: Jar) {
+    archiveClassifier.set('sources')
+    from project.android.sourceSets.main.java.srcDirs
+}
 
 publishing {
     publications {
@@ -43,7 +48,8 @@ publishing {
             groupId libGroup
             version libVersion
             artifactId project.name
-            artifact 'build/outputs/aar/logcat4android-debug.aar'
+            artifact 'build/outputs/aar/logcat4android-release.aar'
+            artifact androidSourcesJar
         }
     }
 }

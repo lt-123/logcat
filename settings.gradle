@@ -1,4 +1,3 @@
 rootProject.name = 'logcat'
 include ':logcatlib', ':logcat4kt', ':logcat4android', ':AndroidDemo'
-
-project(":logcatlib").name = "logcat"
+project(":logcatlib").name = "logcat-core"

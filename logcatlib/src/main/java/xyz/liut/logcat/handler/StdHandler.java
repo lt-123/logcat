@@ -85,8 +85,10 @@ public class StdHandler implements LogHandler {
                         log = ANSI_YELLOW + log;
                         break;
                     case ERROR:
-                    case ASSERT:
                         log = ANSI_RED + log;
+                        break;
+                    case ASSERT:
+                        log = ANSI_PURPLE + log;
                         break;
                 }
 

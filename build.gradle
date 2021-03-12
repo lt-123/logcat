@@ -1,12 +1,12 @@
 // 全局配置
 ext {
     libGroup = 'xyz.liut.logcat'
-    libVersion = '1.1.2'
+    libVersion = '1.2.0'
 }
 
 buildscript {
 
-    ext.kotlin_version = '1.4.21'
+    ext.kotlin_version = '1.4.31'
 
     repositories {
         google()
