@@ -48,7 +48,7 @@ class MainActivity : AppCompatActivity() {
             }
 
         bt.setOnClickListener {
-            logDebug("value = ${Date()}")
+            logDebug { "value = ${Date()}" }
         }
 
     }

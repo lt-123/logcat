@@ -96,17 +96,19 @@ L.wtf(new Throwable("wtf test"));
 ### 输出日志-kotlin
 
 ```kotlin
-logVerbose("verbose")
-logDebug("debug")
-logInfo("info")
-logWarn("warn")
-logError("error")
-logWtf("what the fuck")
+logVerbose { "verbose" }
+logDebug { "debug" }
+logInfo { "info" }
+logWarn { "warn" }
+logError { "error" }
+logWtf { "what the fuck" }
 
-logVerbose("verbose", tag = "tag")
-logDebug("debug", tag = "tag")
-logInfo("info", tag = "tag")
-logWarn("warn", tag = "tag")
-logError("error", tag = "tag")
-logWtf("what the fuck", tag = "tag")
+logVerbose("tag") { "verbose" }
+logDebug("tag") { "debug" }
+logInfo("tag") { "info" }
+logWarn("tag") { "warn" }
+logError("tag") { "error" }
+logWtf("tag") { "what the fuck" }
+
+NullPointerException("npe").printLogcat()
 ```
