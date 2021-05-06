@@ -96,7 +96,7 @@ public class Logcat {
      */
     private void outputLogcat(LogLevel logLevel, @Nullable String tag, Object msg, Throwable e) {
         if (handlers.size() == 0) {
-            System.err.println("No LogHandler " + msg);
+//            System.err.println("No LogHandler " + msg);
             return;
         }
 
