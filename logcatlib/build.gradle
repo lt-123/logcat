@@ -15,8 +15,6 @@ dependencies {
     compileOnly 'org.jetbrains:annotations-java5:15.0'
 }
 
-apply from: "${rootDir}/publish-jcenter.gradle"
-
 publishing {
     publications {
         mavenJava(MavenPublication) {

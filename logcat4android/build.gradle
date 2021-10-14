@@ -1,7 +1,6 @@
 plugins {
     id "maven-publish"
     id 'com.android.library'
-    id "com.jfrog.bintray" version "1.8.5"
 }
 
 sourceCompatibility = "8"
@@ -35,21 +34,23 @@ dependencies {
     compileOnly project(':logcat-core')
 }
 
-apply from: "${rootDir}/publish-jcenter.gradle"
-
 task androidSourcesJar(type: Jar) {
     archiveClassifier.set('sources')
     from project.android.sourceSets.main.java.srcDirs
 }
 
-publishing {
-    publications {
-        mavenJava(MavenPublication) {
-            groupId libGroup
-            version libVersion
-            artifactId project.name
-            artifact 'build/outputs/aar/logcat4android-release.aar'
-            artifact androidSourcesJar
+afterEvaluate {
+    publishing {
+        def libArtifactId = project.name.toLowerCase()
+        publications {
+            release(MavenPublication) {
+                from components.release
+                artifact androidSourcesJar
+
+                groupId libGroup
+                version libVersion
+                artifactId libArtifactId
+            }
         }
     }
 }
