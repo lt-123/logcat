@@ -26,9 +26,6 @@ compileTestKotlin {
     kotlinOptions.jvmTarget = "1.6"
 }
 
-
-apply from: "${rootDir}/publish-jcenter.gradle"
-
 publishing {
     publications {
         mavenJava(MavenPublication) {

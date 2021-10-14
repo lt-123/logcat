@@ -1,8 +1,9 @@
 # Logcat
 
-[![Download](https://api.bintray.com/packages/lt-123/maven/logcat/images/download.svg)](https://bintray.com/lt-123/maven/logcat/)
+[![Download](https://api.bintray.com/packages/lt-123/maven/logcat-core/images/download.svg)](https://bintray.com/lt-123/maven/logcat-core/)
 
-一个 Java 平台的简易的 log 工具。 可用于 Java、 kotlin、 Android。共三个模块， logcat 是基础包， logcat4kt, 是kotlin 的扩展， logcat4Android 内置了 AndroidLogcatHandler（使用安卓内置的Log工具输出）。
+一个 Java 平台的简易的 log 工具。 可用于 Java、 kotlin、 Android。共三个模块， logcat 是基础包， logcat4kt, 是kotlin 的扩展，
+logcat4Android 内置了 AndroidLogcatHandler（使用安卓内置的Log工具输出）。
 
 ## 集成
 
