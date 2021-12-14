@@ -1,7 +1,7 @@
 // 全局配置
 ext {
     libGroup = 'xyz.liut.logcat'
-    libVersion = '1.2.1'
+    libVersion = '1.2.2'
 }
 
 buildscript {
